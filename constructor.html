@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Конструктор грядки · Ripe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="constructor.css" />
+  <script src="cultures.js" defer></script>
+  <script src="constructor.js" defer></script>
+</head>
+<body>
+
+  <!-- ========================== Шапка сервиса ========================== -->
+  <header class="app-header">
+    <div class="app-header__left">
+      <a class="logo" href="index.html" data-main-link aria-label="Ripe — на главную">
+        <span class="logo__mark" aria-hidden="true"></span>
+        <span class="logo__text">Ripe</span>
+      </a>
+
+      <nav class="nav" aria-label="Разделы сервиса">
+        <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Моя грядка</span>
+        <span class="nav__item is-active" aria-current="page">Конструктор</span>
+        <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Календарь</span>
+        <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Огород</span>
+        <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Урожай</span>
+      </nav>
+    </div>
+
+    <div class="app-header__right">
+      <div class="place-switch">
+        <button id="placeBtn" class="place-switch__btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="placeMenu">
+          Площадка «Опушка» <span aria-hidden="true">▾</span>
+        </button>
+        <ul id="placeMenu" class="place-switch__menu" role="menu" aria-label="Площадки" hidden></ul>
+      </div>
+      <button class="icon-btn" type="button" disabled title="Уведомления недоступны в этой версии" aria-label="Уведомления"></button>
+      <button class="avatar" type="button" disabled title="Профиль недоступен в этой версии" aria-label="Профиль"></button>
+    </div>
+  </header>
+
+  <!-- ========================== Экран 2.1: Конструктор ========================== -->
+  <main class="page">
+    <div class="page__head">
+      <h1>План посадок</h1>
+      <div class="segmented" role="group" aria-label="Режим плана">
+        <button class="segmented__btn" type="button" data-mode="starter" aria-pressed="false">Стартовый набор</button>
+        <button class="segmented__btn is-active" type="button" data-mode="own" aria-pressed="true">Свой выбор</button>
+      </div>
+    </div>
+
+    <p id="starterNote" class="banner" hidden>
+      Стартовый набор с гарантией: подобран под зоны площадки и точно вырастет. Чтобы менять культуры, переключитесь на «Свой выбор» — ваш план сохранится.
+    </p>
+
+    <div class="layout">
+      <!-- Каталог культур -->
+      <section class="card catalog" aria-labelledby="catalogTitle">
+        <div class="catalog__head">
+          <h2 id="catalogTitle">Культуры</h2>
+          <span id="cultureCount" class="muted small"></span>
+        </div>
+        <label class="field">
+          <span class="field__label">Поиск</span>
+          <input id="cultureSearch" class="field__input" type="search" placeholder="Томат, базилик…" autocomplete="off" />
+        </label>
+        <div id="categoryChips" class="chips" role="group" aria-label="Категории"></div>
+        <ul id="cultureList" class="culture-list" aria-label="Список культур"></ul>
+      </section>
+
+      <!-- Ячейки + подсказки -->
+      <div class="center">
+        <section class="card" aria-labelledby="cellsTitle">
+          <div class="card__head">
+            <h2 id="cellsTitle">Ваши ячейки</h2>
+            <span id="cellsCounter" class="muted small"></span>
+          </div>
+          <p id="cellsHint" class="muted small"></p>
+          <div id="cellZones" class="zones"></div>
+        </section>
+
+        <section class="card" aria-labelledby="hintsTitle">
+          <h2 id="hintsTitle" class="h3">Подсказки</h2>
+          <ul id="hintList" class="hints" aria-live="polite"></ul>
+        </section>
+      </div>
+
+      <!-- Сводка -->
+      <aside class="card summary" aria-labelledby="summaryTitle">
+        <h2 id="summaryTitle">Сводка</h2>
+        <ul id="summaryRows" class="summary__rows"></ul>
+        <hr />
+        <div class="kv kv--strong"><dt>Ожидаемый урожай</dt><dd id="summaryTotal">—</dd></div>
+        <div class="kv"><dt>Первый урожай</dt><dd id="summaryFirst">—</dd></div>
+        <button id="saveBtn" class="btn btn--primary btn--block" type="button">Сохранить план</button>
+        <p id="saveStatus" class="save-status" aria-live="polite"></p>
+      </aside>
+    </div>
+  </main>
+
+  <button class="fab" type="button" disabled title="Чат с агрономом недоступен в этой версии">
+    <span class="fab__dot" aria-hidden="true"></span>Спросить агронома
+  </button>
+
+  <!-- ========================== Экран 2.2: Карточка культуры ========================== -->
+  <div id="modalCulture" class="modal" hidden>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="cultureTitle">
+      <div class="modal__head">
+        <h2 id="cultureTitle"></h2>
+        <button class="modal__close" type="button" data-close="modalCulture" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="placeholder" aria-hidden="true">Фото культуры</div>
+      <div id="cultureChips" class="chips"></div>
+      <dl id="cultureFacts" class="facts"></dl>
+      <p id="cultureNote" class="muted"></p>
+      <div class="modal__actions">
+        <button id="cultureAdd" class="btn btn--primary" type="button" data-autofocus>Добавить в ячейку</button>
+        <button class="btn btn--secondary" type="button" data-close="modalCulture">Закрыть</button>
+      </div>
+      <p id="cultureReason" class="muted small"></p>
+    </div>
+  </div>
+
+  <!-- ========================== Экран 2.3: Кто посадит ========================== -->
+  <div id="modalWho" class="modal" hidden>
+    <div class="modal__card" role="dialog" aria-modal="true" aria-labelledby="whoTitle">
+      <div class="modal__head">
+        <h2 id="whoTitle">Кто посадит?</h2>
+        <button class="modal__close" type="button" data-close="modalWho" aria-label="Закрыть">✕</button>
+      </div>
+      <p class="muted">План готов. Выберите, как растения попадут в ячейки.</p>
+
+      <fieldset class="options">
+        <legend class="sr-only">Кто посадит</legend>
+        <label class="option">
+          <input type="radio" name="who" value="self" />
+          <span class="option__radio" aria-hidden="true"></span>
+          <span class="option__text">
+            <strong>Приеду и посажу сам</strong>
+            <span>Садовник подготовит ячейки и рассаду к вашему приезду</span>
+          </span>
+        </label>
+        <label class="option">
+          <input type="radio" name="who" value="gardener" checked />
+          <span class="option__radio" aria-hidden="true"></span>
+          <span class="option__text">
+            <strong>Посадит садовник</strong>
+            <span>Пришлём фотоотчёт после посадки</span>
+          </span>
+          <span class="option__tag">включено в «под ключ»</span>
+        </label>
+      </fieldset>
+
+      <label class="field">
+        <span id="plantDateLabel" class="field__label">Дата посадки</span>
+        <input id="plantDate" class="field__input" type="date" />
+      </label>
+      <p id="plantDateNote" class="muted small"></p>
+
+      <button id="whoConfirm" class="btn btn--primary btn--block" type="button" data-autofocus>Подтвердить</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
