@@ -1,0 +1,8 @@
+/* Точка входа: порядок подключения важен */
+@import url('font.css');        /* шрифт — один на весь сайт */
+@import url('base.css');        /* токены, сброс, типографика, утилиты */
+@import url('header.css');      /* шапка и меню (общая для всех страниц) */
+@import url('splash.css');      /* заставка */
+@import url('home.css');        /* главная страница */
+@import url('constructor.css'); /* страница «Конструктор» */
+@import url('adaptive.css');    /* адаптив (всегда последним) */

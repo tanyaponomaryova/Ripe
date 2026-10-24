@@ -1,0 +1,90 @@
+/* Общие токены, сброс и типографика для всех страниц */
+:root {
+  --ink: #1a1a1a;
+  --ink-2: #333;
+  --muted: #737373;
+  --faint: #8c8c8c;
+  --line: #d9d9d9;
+  --line-strong: #b3b3b3;
+  --fill: #f0f0f0;
+  --fill-2: #e6e6e6;
+  --cell: #d1d1d1;
+  --bg: #fff;
+  --page: #fafafa;
+  --radius: 8px;
+  --shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  --header-h: 64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  font: 14px/1.4 var(--font);
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+body.has-modal {
+  overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.h3 {
+  font-size: 16px;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+.muted {
+  color: var(--muted);
+}
+.small {
+  font-size: 13px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 0;
+  width: 100%;
+}

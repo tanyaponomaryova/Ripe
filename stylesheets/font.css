@@ -1,0 +1,7 @@
+/* Единственное место, где подключается и меняется шрифт сайта.
+   Чтобы заменить шрифт: поменяйте ссылку Google Fonts и значение --font. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --font: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}

@@ -1,0 +1,199 @@
+/* Шапка сайта — общая для всех страниц. Мобильная версия — в adaptive.css */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: var(--header-h);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.app-header__left,
+.app-header__right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+.app-header__right {
+  gap: 16px;
+}
+
+/* ---------- Логотип ---------- */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.logo__mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: block;
+}
+.logo__text {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* ---------- Навигация ----------
+   Пункт — это либо <a class="nav__item"> (доступен),
+   либо <span class="nav__item is-disabled"> (недоступен). */
+.nav {
+  display: flex;
+  gap: 8px;
+}
+.nav__item {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+a.nav__item:hover {
+  background: var(--fill);
+}
+.nav__item.is-active {
+  background: var(--fill-2);
+  color: var(--ink);
+  font-weight: 600;
+}
+.nav__item.is-disabled {
+  color: #bdbdbd;
+  cursor: not-allowed;
+  user-select: none;
+}
+
+/* ---------- Бургер (виден только на мобильных) ---------- */
+.burger {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  cursor: pointer;
+}
+.burger__line {
+  position: absolute;
+  left: 12px;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink);
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+.burger__line:nth-child(1) {
+  top: 15px;
+}
+.burger__line:nth-child(2) {
+  top: 21px;
+}
+.burger__line:nth-child(3) {
+  top: 27px;
+}
+.app-header.is-open .burger__line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.app-header.is-open .burger__line:nth-child(2) {
+  opacity: 0;
+}
+.app-header.is-open .burger__line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* ---------- Выбор площадки ---------- */
+.place-switch {
+  position: relative;
+}
+.place-switch__btn {
+  border: 0;
+  background: var(--fill);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.place-switch__btn:hover,
+.place-switch__btn[aria-expanded='true'] {
+  background: var(--fill-2);
+}
+.place-switch__menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 300px;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.place-switch__menu[hidden] {
+  display: none;
+}
+.place-option {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  text-align: left;
+  padding: 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  cursor: pointer;
+}
+.place-option:hover:not(:disabled) {
+  background: var(--fill);
+}
+.place-option.is-current {
+  background: var(--fill);
+}
+.place-option:disabled {
+  cursor: not-allowed;
+  color: #a6a6a6;
+}
+.place-option__check {
+  width: 16px;
+  font-weight: 600;
+}
+.place-option__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.place-option__text span {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.icon-btn,
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  padding: 0;
+  cursor: not-allowed;
+}
+.icon-btn {
+  border: 0;
+  background: var(--fill);
+}
+.avatar {
+  border: 0;
+  background: #d9d9d9;
+}

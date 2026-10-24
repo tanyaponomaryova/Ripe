@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ripe | ситифермерство</title>
+    <!-- Шрифт подключается в stylesheets/font.css -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="stylesheets/style.css" />
+    <script src="scripts/cultures.js" defer></script>
+    <script src="scripts/header.js" defer></script>
+    <script src="scripts/splash.js"></script>
+  </head>
+  <body class="home">
+    <div id="splash">
+      <div class="splash-content">
+        <img src="img/logo.svg" alt="Логотип" class="splash-logo" />
+        <div class="splash-text">Название сайта</div>
+      </div>
+    </div>
+
+    <!-- ========================== Шапка сервиса ========================== -->
+    <header class="app-header">
+      <div class="app-header__left">
+        <a class="logo" href="index.html" data-main-link aria-label="Ripe — на главную">
+          <img class="logo__mark" src="img/logo.svg" alt="" width="28" height="28" />
+          <span class="logo__text">Ripe</span>
+        </a>
+
+        <nav class="nav" id="mainNav" aria-label="Разделы сервиса">
+          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Моя грядка</span>
+          <a class="nav__item" href="constructor.html">Конструктор</a>
+          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Календарь</span>
+          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Огород</span>
+          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Урожай</span>
+        </nav>
+      </div>
+
+      <div class="app-header__right">
+        <div class="place-switch">
+          <button id="placeBtn" class="place-switch__btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="placeMenu">
+            Площадка «Опушка» <span aria-hidden="true">▾</span>
+          </button>
+          <ul id="placeMenu" class="place-switch__menu" role="menu" aria-label="Площадки" hidden></ul>
+        </div>
+        <button class="icon-btn" type="button" disabled title="Уведомления недоступны в этой версии" aria-label="Уведомления"></button>
+        <button class="avatar" type="button" disabled title="Профиль недоступен в этой версии" aria-label="Профиль"></button>
+      </div>
+
+      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+        <span class="burger__line"></span>
+      </button>
+    </header>
+
+    <main class="page--home">
+      <p class="brand">Ripe | ситифермерство</p>
+
+      <section class="hero">
+        <h1>Мы уже растем (🌱)</h1>
+
+        <p class="lead">
+          Мы создаём загородные пространства, где можно арендовать собственную
+          грядку, выращивать любимые растения и следить за ними прямо с
+          телефона. Приезжай за урожаем и проводи время на природе вместе с
+          друзьями!
+        </p>
+
+        <form class="form" action="#" method="post">
+          <input
+            type="email"
+            name="email"
+            placeholder="ripemedia@mail.ru"
+            aria-label="Электронная почта"
+            autocomplete="email"
+            required
+          />
+          <button type="submit">Подписаться</button>
+        </form>
+
+        <nav class="social" aria-label="Социальные сети">
+          <a
+            href="https://vk.com/"
+            target="_blank"
+            rel="noopener"
+            aria-label="ВКонтакте"
+          >
+            <img src="img/vk.svg" alt="" />
+          </a>
+          <a
+            href="https://t.me/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Telegram"
+          >
+            <img src="img/tg.svg" alt="" />
+          </a>
+        </nav>
+      </section>
+    </main>
+  </body>
+</html>

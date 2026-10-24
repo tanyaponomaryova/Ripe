@@ -1,8 +1,8 @@
 /*
  * Ripe · Конструктор грядки (экраны 2.1–2.3)
  * Поиск и фильтры культур, распределение по ячейкам и зонам (клик «+» или drag & drop),
- * динамические подсказки, сводка урожая, карточка культуры (2.2), «Кто посадит» (2.3),
- * выпадающий список площадок.
+ * динамические подсказки, сводка урожая, карточка культуры (2.2), «Кто посадит» (2.3).
+ * Шапка (меню, выбор площадки) — в header.js.
  */
 (function () {
   "use strict";
@@ -554,44 +554,6 @@
     return y === new Date().getFullYear() ? `${d} ${m[mo - 1]}` : `${d} ${m[mo - 1]} ${y}`;
   }
 
-  /* ---------------------------------------------------------- Площадки (выпадающий список) */
-
-  function renderPlaces() {
-    const menu = $("#placeMenu");
-    menu.replaceChildren(
-      ...D.places.map((p) =>
-        el(
-          "li",
-          { role: "none" },
-          el(
-            "button",
-            {
-              type: "button",
-              role: "menuitemradio",
-              class: "place-option" + (p.name === D.plan.place ? " is-current" : ""),
-              "aria-checked": String(p.name === D.plan.place),
-              disabled: !p.available,
-              title: p.available ? "" : "Смена площадки недоступна в этой версии",
-              onclick: () => togglePlaces(false),
-            },
-            el("span", { class: "place-option__check", "aria-hidden": "true", text: p.name === D.plan.place ? "✓" : "" }),
-            el("span", { class: "place-option__text" },
-              el("strong", { text: p.name }),
-              el("span", { text: p.available ? p.note : `${p.note} · недоступно в демо` })
-            )
-          )
-        )
-      )
-    );
-  }
-
-  function togglePlaces(force) {
-    const btn = $("#placeBtn");
-    const open = force ?? btn.getAttribute("aria-expanded") !== "true";
-    btn.setAttribute("aria-expanded", String(open));
-    $("#placeMenu").hidden = !open;
-  }
-
   /* ---------------------------------------------------------- Toast */
 
   let toastTimer;
@@ -606,8 +568,6 @@
   /* ---------------------------------------------------------- Инициализация */
 
   function init() {
-    $$("[data-main-link]").forEach((a) => (a.href = D.mainPageUrl));
-
     $("#cultureSearch").addEventListener("input", (e) => {
       state.query = e.target.value;
       renderList();
@@ -626,24 +586,14 @@
       })
     );
 
-    $("#placeBtn").addEventListener("click", (e) => {
-      e.stopPropagation();
-      togglePlaces();
-    });
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest(".place-switch")) togglePlaces(false);
-    });
-
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") {
         const open = $$(".modal").find((x) => !x.hidden);
         if (open) closeModal(open.id);
-        else togglePlaces(false);
       }
       trapFocus(e);
     });
 
-    renderPlaces();
     renderCategories();
     renderPlan();
   }
