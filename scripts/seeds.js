@@ -5,22 +5,22 @@
  * Пути до картинок — в scripts/seed-config.js.
  */
 (function () {
-  "use strict";
+  'use strict';
 
   /* ============================ НАСТРОЙКИ ============================ */
   // --- Частота появления ---
   const SPAWN_ON_PRESS = 3; // сколько семечек сразу при нажатии
-  const SPAWN_DISTANCE_PX = 18; // 1 семечко на каждые N px движения (меньше = гуще)
+  const SPAWN_DISTANCE_PX = 40; // 1 семечко на каждые N px движения (меньше = гуще)
   const SPAWN_HOLD_PER_SEC = 0; // семечек в секунду, если держим на месте (0 = не сыпать)
 
   // --- Вид ---
-  const SIZE_MIN_PX = 16; // ширина семечки, от
-  const SIZE_MAX_PX = 32; // ...и до
+  const SIZE_MIN_PX = 30; // ширина семечки, от
+  const SIZE_MAX_PX = 50; // ...и до
   const OPACITY = 1; // прозрачность 0..1
   const START_SPREAD_PX = 10; // разброс места появления вокруг курсора
 
   // --- Физика (px и секунды) ---
-  const GRAVITY = 900; // ускорение вниз, px/с²
+  const GRAVITY = 600; // ускорение вниз, px/с²
   const MAX_FALL_SPEED = 900; // предельная скорость падения, px/с
   const START_VX = 60; // случайная горизонтальная скорость при появлении, ±px/с
   const START_VY_MIN = -120; // начальная вертикальная скорость (минус = вверх)
@@ -32,14 +32,14 @@
   // --- Прочее ---
   const MAX_SEEDS = 400; // потолок количества семечек на экране
   const IGNORE_SELECTOR =
-    "input, textarea, select, .nav, .burger, .logo, .place-switch, .icon-btn, .avatar"; // где нажатие не сыплет семечки (поля ввода и меню шапки)
+    'input, textarea, select, .nav, .burger, .logo, .place-switch, .icon-btn, .avatar'; // где нажатие не сыплет семечки (поля ввода и меню шапки)
   const LOCK_SCROLL_IF_PAGE_FITS = true; // на телефоне: если страница не скроллится, не даём браузеру перехватывать жест
   const RESPECT_REDUCED_MOTION = true; // отключить, если в системе включено «уменьшить анимацию»
   /* ================================================================== */
 
   if (
     RESPECT_REDUCED_MOTION &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
   )
     return;
 
@@ -47,18 +47,18 @@
   if (!SOURCES.length) return;
 
   /* ---------- Холст на заднем плане ---------- */
-  const canvas = document.createElement("canvas");
-  canvas.setAttribute("aria-hidden", "true");
+  const canvas = document.createElement('canvas');
+  canvas.setAttribute('aria-hidden', 'true');
   Object.assign(canvas.style, {
-    position: "fixed",
-    inset: "0",
-    width: "100%",
-    height: "100%",
-    zIndex: "-1", // позади контента
-    pointerEvents: "none",
+    position: 'fixed',
+    inset: '0',
+    width: '100%',
+    height: '100%',
+    zIndex: '-1', // позади контента
+    pointerEvents: 'none',
   });
   document.body.prepend(canvas);
-  const ctx = canvas.getContext("2d");
+  const ctx = canvas.getContext('2d');
 
   let W = 0;
   let H = 0;
@@ -76,7 +76,7 @@
     if (!LOCK_SCROLL_IF_PAGE_FITS) return;
     const fits =
       document.documentElement.scrollHeight <= window.innerHeight + 1;
-    document.body.style.touchAction = fits ? "none" : "";
+    document.body.style.touchAction = fits ? 'none' : '';
   }
 
   /* ---------- Картинки ---------- */
@@ -84,7 +84,7 @@
   SOURCES.forEach((src) => {
     const img = new Image();
     img.onload = () => images.push(img);
-    img.onerror = () => console.warn("Семечка не загрузилась:", src);
+    img.onerror = () => console.warn('Семечка не загрузилась:', src);
     img.src = src;
   });
 
@@ -143,7 +143,8 @@
     for (let i = seeds.length - 1; i >= 0; i--) {
       const s = seeds[i];
       s.vy = Math.min(MAX_FALL_SPEED, s.vy + GRAVITY * dt);
-      s.x += (s.vx + Math.sin(time * SWAY_SPEED + s.phase) * SWAY_AMPLITUDE) * dt;
+      s.x +=
+        (s.vx + Math.sin(time * SWAY_SPEED + s.phase) * SWAY_AMPLITUDE) * dt;
       s.y += s.vy * dt;
       s.rot += s.vr * dt;
 
@@ -170,15 +171,20 @@
   /* ---------- Ввод: мышь и касания (pointer events) ---------- */
   const pointers = new Map(); // pointerId -> {x, y, acc, holdAcc}
 
-  window.addEventListener("pointerdown", (e) => {
-    if (e.pointerType === "mouse" && e.button !== 0) return;
+  window.addEventListener('pointerdown', (e) => {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
     if (e.target.closest && e.target.closest(IGNORE_SELECTOR)) return;
-    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY, acc: 0, holdAcc: 0 });
+    pointers.set(e.pointerId, {
+      x: e.clientX,
+      y: e.clientY,
+      acc: 0,
+      holdAcc: 0,
+    });
     for (let i = 0; i < SPAWN_ON_PRESS; i++) spawn(e.clientX, e.clientY);
     if (SPAWN_HOLD_PER_SEC > 0) startLoop();
   });
 
-  window.addEventListener("pointermove", (e) => {
+  window.addEventListener('pointermove', (e) => {
     const p = pointers.get(e.pointerId);
     if (!p) return;
     const dx = e.clientX - p.x;
@@ -199,17 +205,17 @@
   });
 
   const release = (e) => pointers.delete(e.pointerId);
-  window.addEventListener("pointerup", release);
-  window.addEventListener("pointercancel", release);
+  window.addEventListener('pointerup', release);
+  window.addEventListener('pointercancel', release);
 
   // чтобы при протяжке мышью не выделялся текст
-  document.addEventListener("selectstart", (e) => {
+  document.addEventListener('selectstart', (e) => {
     if (!pointers.size) return;
     const el = e.target.nodeType === 1 ? e.target : e.target.parentElement;
     if (!(el && el.closest(IGNORE_SELECTOR))) e.preventDefault();
   });
 
-  window.addEventListener("resize", resize);
-  window.addEventListener("load", updateTouchAction);
+  window.addEventListener('resize', resize);
+  window.addEventListener('load', updateTouchAction);
   resize();
 })();

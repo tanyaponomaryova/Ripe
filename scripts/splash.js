@@ -3,11 +3,11 @@
  * одна в другую (имитация загрузки). Больше на экране ничего нет.
  */
 (function () {
-  "use strict";
+  'use strict';
 
   /* ============================ НАСТРОЙКИ ============================ */
   const SPLASH_MIN_MS = 800; // минимальное время показа заставки
-  const SPLASH_FRAME_MS = 90; // сколько длится переход к следующему семечку (меньше = быстрее)
+  const SPLASH_FRAME_MS = 100; // сколько длится переход к следующему семечку (меньше = быстрее)
   const SPLASH_SEED_SIZE_PX = 64; // размер области семечки на экране
   const SPLASH_SPIN_DEG_PER_SEC = 0; // плавное вращение семечки (0 = без вращения)
   /* ================================================================== */
@@ -20,15 +20,15 @@
   const smooth = (x) => x * x * (3 - 2 * x); // плавное ускорение/замедление
 
   function startCycle() {
-    const box = document.getElementById("splashSeeds");
+    const box = document.getElementById('splashSeeds');
     if (!box || !SOURCES.length) return;
-    box.style.width = box.style.height = SPLASH_SEED_SIZE_PX + "px";
+    box.style.width = box.style.height = SPLASH_SEED_SIZE_PX + 'px';
 
     // все семечки лежат стопкой, показываем их через opacity — без подмены src,
     // поэтому нет мигания и подгрузки в процессе
     const imgs = SOURCES.map((src) => {
       const img = new Image();
-      img.alt = "";
+      img.alt = '';
       img.src = src;
       box.append(img);
       return img;
@@ -54,18 +54,18 @@
     rafId = requestAnimationFrame(frame);
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", startCycle);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startCycle);
   } else {
     startCycle();
   }
 
-  window.addEventListener("load", () => {
-    const splash = document.getElementById("splash");
+  window.addEventListener('load', () => {
+    const splash = document.getElementById('splash');
     if (!splash) return;
     const wait = Math.max(0, SPLASH_MIN_MS - (Date.now() - start));
     setTimeout(() => {
-      splash.classList.add("hidden");
+      splash.classList.add('hidden');
       // после завершения fade-out (0.4s) останавливаем анимацию
       setTimeout(() => {
         stopped = true;

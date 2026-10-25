@@ -6,7 +6,7 @@
   --faint: #8c8c8c;
   --line: #d9d9d9;
   --line-strong: #b3b3b3;
-  --fill: #f0f0f0;
+  --fill: #ececec;
   --fill-2: #e6e6e6;
   --cell: #d1d1d1;
   --bg: #fff;
@@ -91,8 +91,22 @@ hr {
 
 /* ---------- Toast (общий) ---------- */
 .toast {
-  position: fixed; left: 50%; bottom: 40px; transform: translate(-50%, 16px);
-  padding: 12px 20px; border-radius: 8px; background: var(--ink); color: #fff;
-  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 60;
+  position: fixed;
+  left: 50%;
+  bottom: 40px;
+  transform: translate(-50%, 16px);
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  z-index: 60;
 }
-.toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
