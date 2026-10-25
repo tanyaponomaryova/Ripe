@@ -43,6 +43,12 @@
   letter-spacing: -0.01em;
 }
 
+.hero h1 span img {
+  height: 1.2em;
+  width: auto;
+  vertical-align: -0.1em;
+}
+
 .lead {
   margin: clamp(16px, 2.5vw, 24px) auto 0;
   max-width: 640px;
