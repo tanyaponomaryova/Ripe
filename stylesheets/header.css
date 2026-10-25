@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--bg);
+  /* background: var(--bg); */
   border-bottom: 1px solid var(--line);
 }
 .app-header__left,

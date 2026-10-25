@@ -88,3 +88,11 @@ hr {
   margin: 0;
   width: 100%;
 }
+
+/* ---------- Toast (общий) ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: 40px; transform: translate(-50%, 16px);
+  padding: 12px 20px; border-radius: 8px; background: var(--ink); color: #fff;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 60;
+}
+.toast.is-visible { opacity: 1; transform: translate(-50%, 0); }

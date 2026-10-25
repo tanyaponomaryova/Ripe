@@ -17,19 +17,15 @@
   pointer-events: none;
 }
 
-.splash-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  color: #fff;
+.splash-seeds {
+  position: relative; /* размер задаётся в splash.js */
 }
-
-.splash-logo {
-  width: 120px;
-  height: auto;
-}
-
-.splash-text {
-  font: 600 24px/1.2 var(--font);
+.splash-seeds img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  will-change: opacity;
 }

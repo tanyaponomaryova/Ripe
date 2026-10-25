@@ -10,45 +10,108 @@
     <link rel="stylesheet" href="stylesheets/style.css" />
     <script src="scripts/cultures.js" defer></script>
     <script src="scripts/header.js" defer></script>
+    <script src="scripts/seeds.js" defer></script>
+    <script src="scripts/subscribe.js" defer></script>
+    <script src="scripts/seed-config.js"></script>
     <script src="scripts/splash.js"></script>
   </head>
   <body class="home">
     <div id="splash">
-      <div class="splash-content">
-        <img src="img/logo.svg" alt="Логотип" class="splash-logo" />
-        <div class="splash-text">Название сайта</div>
-      </div>
+      <div id="splashSeeds" class="splash-seeds"></div>
+    </div>
     </div>
 
     <!-- ========================== Шапка сервиса ========================== -->
     <header class="app-header">
       <div class="app-header__left">
-        <a class="logo" href="index.html" data-main-link aria-label="Ripe — на главную">
-          <img class="logo__mark" src="img/logo.svg" alt="" width="28" height="28" />
+        <a
+          class="logo"
+          href="index.html"
+          data-main-link
+          aria-label="Ripe — на главную"
+        >
+          <img
+            class="logo__mark"
+            src="img/logo.svg"
+            alt=""
+            width="28"
+            height="28"
+          />
           <span class="logo__text">Ripe</span>
         </a>
 
         <nav class="nav" id="mainNav" aria-label="Разделы сервиса">
-          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Моя грядка</span>
+          <span
+            class="nav__item is-disabled"
+            aria-disabled="true"
+            title="Недоступно в этой версии"
+            >Моя грядка</span
+          >
           <a class="nav__item" href="constructor.html">Конструктор</a>
-          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Календарь</span>
-          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Огород</span>
-          <span class="nav__item is-disabled" aria-disabled="true" title="Недоступно в этой версии">Урожай</span>
+          <span
+            class="nav__item is-disabled"
+            aria-disabled="true"
+            title="Недоступно в этой версии"
+            >Календарь</span
+          >
+          <span
+            class="nav__item is-disabled"
+            aria-disabled="true"
+            title="Недоступно в этой версии"
+            >Огород</span
+          >
+          <span
+            class="nav__item is-disabled"
+            aria-disabled="true"
+            title="Недоступно в этой версии"
+            >Урожай</span
+          >
         </nav>
       </div>
 
       <div class="app-header__right">
         <div class="place-switch">
-          <button id="placeBtn" class="place-switch__btn" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="placeMenu">
+          <button
+            id="placeBtn"
+            class="place-switch__btn"
+            type="button"
+            aria-haspopup="menu"
+            aria-expanded="false"
+            aria-controls="placeMenu"
+          >
             Площадка «Опушка» <span aria-hidden="true">▾</span>
           </button>
-          <ul id="placeMenu" class="place-switch__menu" role="menu" aria-label="Площадки" hidden></ul>
+          <ul
+            id="placeMenu"
+            class="place-switch__menu"
+            role="menu"
+            aria-label="Площадки"
+            hidden
+          ></ul>
         </div>
-        <button class="icon-btn" type="button" disabled title="Уведомления недоступны в этой версии" aria-label="Уведомления"></button>
-        <button class="avatar" type="button" disabled title="Профиль недоступен в этой версии" aria-label="Профиль"></button>
+        <button
+          class="icon-btn"
+          type="button"
+          disabled
+          title="Уведомления недоступны в этой версии"
+          aria-label="Уведомления"
+        ></button>
+        <button
+          class="avatar"
+          type="button"
+          disabled
+          title="Профиль недоступен в этой версии"
+          aria-label="Профиль"
+        ></button>
       </div>
 
-      <button class="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mainNav">
+      <button
+        class="burger"
+        type="button"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+        aria-controls="mainNav"
+      >
         <span class="burger__line"></span>
         <span class="burger__line"></span>
         <span class="burger__line"></span>
@@ -90,7 +153,7 @@
             <img src="img/vk.svg" alt="" />
           </a>
           <a
-            href="https://t.me/"
+            href="https://t.me/ripehse"
             target="_blank"
             rel="noopener"
             aria-label="Telegram"
@@ -100,5 +163,7 @@
         </nav>
       </section>
     </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </body>
 </html>
