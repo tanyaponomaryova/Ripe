@@ -143,12 +143,12 @@
 /* Курсор: класс sow-cursor ставит скрипт */
 .sow-cursor {
   cursor:
-    url('../img/cursor-seed.svg') 16 16,
+    url('../img/seeds/01.png') 16 16,
     crosshair;
 }
 .sow-cursor.is-sowing {
   cursor:
-    url('../img/cursor-seed-active.svg') 16 16,
+    url('../img/seeds/02.png') 16 16,
     crosshair;
 }
 /* на кнопках и ссылках остаётся обычная рука */
@@ -167,12 +167,13 @@
   padding: 0 20px;
   text-align: center;
   font-size: 13px;
-  color: #9a9a9a;
+  color: var(--faint);
   pointer-events: none;
   user-select: none;
   transition: opacity 0.6s;
   animation: sow-hint-pulse 3s ease-in-out infinite;
 }
+
 .sow-hint.is-hidden {
   opacity: 0;
   animation: none;

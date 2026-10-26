@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #808080 center / cover no-repeat; /* серый — пока не загрузилась картинка; сама картинка ставится в splash.js */
+  background: var(--home-bg) center / cover no-repeat; /* серый — пока не загрузилась картинка; сама картинка ставится в splash.js */
   display: flex;
   align-items: center;
   justify-content: center;
