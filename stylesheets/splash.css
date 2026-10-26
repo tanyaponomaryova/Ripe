@@ -2,7 +2,7 @@
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #e1e1e1; /* серый фон */
+  background: #808080 center / cover no-repeat; /* серый — пока не загрузилась картинка; сама картинка ставится в splash.js */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,7 +19,11 @@
 
 .splash-seeds {
   position: relative; /* размер задаётся в splash.js */
+  filter: drop-shadow(
+    0 4px 10px rgba(0, 0, 0, 0.2)
+  ); /* чтобы семечки читались на любом фоне */
 }
+
 .splash-seeds img {
   position: absolute;
   inset: 0;

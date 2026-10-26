@@ -1,21 +1,71 @@
 /*
- * Ripe · заставка: серый экран, на котором семечки плавно перетекают
- * одна в другую (имитация загрузки). Больше на экране ничего нет.
+ * Ripe · заставка: фоновая картинка на весь экран (при каждой загрузке
+ * страницы — другая), по центру плавно сменяют друг друга семечки
+ * (имитация загрузки). Больше на экране ничего нет.
  */
 (function () {
   'use strict';
 
   /* ============================ НАСТРОЙКИ ============================ */
+  // Фоновые картинки: при каждой загрузке выбирается одна из списка
+  const SPLASH_BACKGROUNDS = ['img/splash/bg-1.png', 'img/splash/bg-2.png'];
+  const SPLASH_AVOID_REPEAT = true; // не показывать подряд один и тот же фон
+
+  // Семечки заставки (отдельный набор, не тот, что сыплется на главной)
+  const SPLASH_SEED_SOURCES = [
+    'img/splash/01.svg',
+    'img/splash/02.svg',
+    'img/splash/03.svg',
+    'img/splash/04.svg',
+    'img/splash/05.svg',
+    'img/splash/06.svg',
+    'img/splash/07.svg',
+    'img/splash/08.svg',
+    'img/splash/09.svg',
+    'img/splash/10.svg',
+    'img/splash/11.svg',
+    'img/splash/12.svg',
+    'img/splash/13.svg',
+    'img/splash/14.svg',
+    'img/splash/15.svg',
+    'img/splash/16.svg',
+    'img/splash/17.svg',
+    'img/splash/18.svg',
+    'img/splash/19.svg',
+  ];
+
   const SPLASH_MIN_MS = 800; // минимальное время показа заставки
-  const SPLASH_FRAME_MS = 100; // сколько длится переход к следующему семечку (меньше = быстрее)
+  const SPLASH_FRAME_MS = 200; // сколько длится переход к следующему семечку (меньше = быстрее)
   const SPLASH_SEED_SIZE_PX = 64; // размер области семечки на экране
   const SPLASH_SPIN_DEG_PER_SEC = 0; // плавное вращение семечки (0 = без вращения)
   /* ================================================================== */
 
-  const SOURCES = window.RIPE_SEED_SOURCES || [];
+  const SOURCES = SPLASH_SEED_SOURCES;
   const start = Date.now();
   let rafId = 0;
   let stopped = false;
+
+  /* ---------- Фон: выбираем сразу, чтобы не было вспышки серого ---------- */
+  (function pickBackground() {
+    if (!SPLASH_BACKGROUNDS.length) return;
+    const KEY = 'ripe:splashBg';
+    let idx = Math.floor(Math.random() * SPLASH_BACKGROUNDS.length);
+    try {
+      if (SPLASH_AVOID_REPEAT && SPLASH_BACKGROUNDS.length > 1) {
+        const prev = Number(localStorage.getItem(KEY));
+        while (idx === prev)
+          idx = Math.floor(Math.random() * SPLASH_BACKGROUNDS.length);
+      }
+      localStorage.setItem(KEY, String(idx));
+    } catch (e) {
+      /* localStorage недоступен — просто случайный фон */
+    }
+    const url = SPLASH_BACKGROUNDS[idx];
+    const style = document.createElement('style');
+    style.textContent = `#splash{background-image:url("${url}");}`;
+    document.head.append(style);
+    new Image().src = url; // предзагрузка
+  })();
 
   const smooth = (x) => x * x * (3 - 2 * x); // плавное ускорение/замедление
 
