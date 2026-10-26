@@ -94,3 +94,13 @@
     transition: none !important;
   }
 }
+
+/* на телефонах и планшетах показываем текст про касание */
+@media (hover: none) and (pointer: coarse) {
+  .sow-hint__mouse {
+    display: none;
+  }
+  .sow-hint__touch {
+    display: inline;
+  }
+}
