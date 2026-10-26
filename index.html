@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ripe | ситифермерство</title>
-    <link rel="icon" type="image/png" href="img/seeds/04.png">
+    <link rel="icon" type="image/png" href="img/seeds/04.png" />
     <!-- Шрифт подключается в stylesheets/font.css -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -12,6 +12,7 @@
     <script src="scripts/cultures.js" defer></script>
     <script src="scripts/header.js" defer></script>
     <script src="scripts/seeds.js" defer></script>
+    <script src="scripts/sow-hint.js" defer></script>
     <script src="scripts/subscribe.js" defer></script>
     <script src="scripts/seed-config.js"></script>
     <script src="scripts/splash.js"></script>
@@ -19,7 +20,6 @@
   <body class="home">
     <div id="splash">
       <div id="splashSeeds" class="splash-seeds"></div>
-    </div>
     </div>
 
     <!-- ========================== Шапка сервиса ========================== -->
@@ -123,16 +123,18 @@
       <p class="brand">Ripe | ситифермерство</p>
 
       <section class="hero">
-        <h1>Мы уже растем (<span><img src="img/seeds/04.png"></span>)</h1>
+        <h1>
+          Мы уже растем (<span><img src="img/seeds/04.png" /></span>)
+        </h1>
 
-      <p class="lead">
-        <!-- <pre> -->
-        Мы создаём загородные пространства, где можно арендовать собственную
-        грядку, выращивать любимые растения и следить 
-        за ними прямо с телефона. Приезжай за урожаем и проводи время на природе вместе с
-        друзьями!
-        <!-- </pre> -->
-      </p>
+        <p class="lead">
+          <!-- <pre> -->
+          Мы создаём загородные пространства, где можно арендовать собственную
+          грядку, выращивать любимые растения и следить за ними прямо с
+          телефона. Приезжай за урожаем и проводи время на природе вместе с
+          друзьями!
+          <!-- </pre> -->
+        </p>
 
         <form class="form" action="#" method="post">
           <input
@@ -168,5 +170,14 @@
     </main>
 
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <p class="sow-hint" id="sowHint">
+      <span class="sow-hint__mouse"
+        >Кликни, чтобы посеять семена будущих растений</span
+      >
+      <span class="sow-hint__touch"
+        >Коснись, чтобы посеять семена будущих растений</span
+      >
+    </p>
   </body>
 </html>
